@@ -13,13 +13,17 @@ import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import com.HMSApp.HospitalMngmnt.entity.enums.City;
 import com.HMSApp.HospitalMngmnt.entity.enums.Status;
 
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -29,13 +33,13 @@ public class Patient {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "patientid")
-	private long patient_id;
+	private Long patientid;
 
-	@Column(name = "patient_name")
-	private String patient_name;
+	@Column(name = "patientname")
+	private String patientname;
 
-	@Column(name = "patient_surname")
-	private String patient_surname;
+	@Column(name = "patientsurname")
+	private String patientsurname;
 
 	@Column(name = "age")
 	private int age;
@@ -51,6 +55,9 @@ public class Patient {
 
 	@Column(name = "email", unique = true)
 	private String email;
+
+	@Column(name = "password")
+	private String password;
 
 	@Enumerated(EnumType.STRING)
 	private City city;
