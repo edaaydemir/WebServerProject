@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../navbar';
+import Footer from '../footer';
 
 function Signup() {
 
@@ -57,8 +58,8 @@ function Signup() {
   return (
     <div> <Navbar></Navbar>
       <div style={styles.container}>
-        <div style={styles.formContainer}>
-          <h2 style={styles.title}>Sign Up</h2>
+        <div style={styles.form}>
+          <h2 style={styles.title}>SIGN UP</h2>
           <form onSubmit={handleSubmit}>
             <div style={styles.inputGroup}>
               <label htmlFor="email" style={styles.label}>E-Mail:</label>
@@ -94,11 +95,11 @@ function Signup() {
             </div>
           </form>
         </div>
-        {/* Kayıt başarılı olduğunda görüntülenecek mesaj */}
-        {successMessage && <p style={styles.successMessage}>{successMessage}</p>}
-        {/* Hata mesajı */}
-        {error && <p style={styles.error}>{error}</p>}
-      </div> </div>
+
+      </div>
+      <Footer></Footer>
+       </div>
+
   );
 }
 
@@ -108,38 +109,31 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100vh',
+    height: '90vh',
     marginTop: '30px',
     marginBottom: '30px'
   },
-  formContainer: {
+  form: {
     width: '400px',
     padding: '20px',
-    backgroundColor: '#f3e5f5',
+    backgroundColor: '#f5f5f5', 
     borderRadius: '10px',
     boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.1)',
     textAlign: 'center',
   },
-  logo: {
-    color: '#6a1b9a',
-    textTransform: 'uppercase',
-    fontWeight: 'bold',
-    fontSize: '24px',
-    marginBottom: '20px',
-  },
   title: {
-    color: '#6a1b9a',
-    marginBottom: '30px',
+    color: '#424242', 
+    marginBottom: '10px',
   },
   inputGroup: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: '20px',
+    marginBottom: '5px',
   },
   label: {
-    color: '#6a1b9a',
+    color: '#424242',
     marginRight: '10px',
     minWidth: '120px',
     textAlign: 'left',
@@ -147,7 +141,7 @@ const styles = {
   input: {
     flex: '1',
     padding: '10px',
-    border: '1px solid #6a1b9a',
+    border: '1px solid #424242',
     borderRadius: '5px',
     maxWidth: '200px',
   },
@@ -156,23 +150,11 @@ const styles = {
   },
   button: {
     padding: '10px 20px',
-    backgroundColor: '#6a1b9a',
-    color: '#fff',
+    backgroundColor: '#f5f5f5', // Gri tonları
+    color: '#424242',
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
-  },
-  error: {
-    color: 'red',
-    fontSize: '12px',
-    textAlign: 'left',
-    marginLeft: '130px',
-  },
-  successMessage: {
-    color: 'green',
-    fontSize: '14px',
-    textAlign: 'center',
-    marginTop: '10px',
   },
 };
 

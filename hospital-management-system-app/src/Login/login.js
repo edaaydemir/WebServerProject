@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../navbar";
+import Footer from '../footer';
 
 function Login() {
   const [userData, setUserData] = useState({
@@ -18,7 +19,7 @@ function Login() {
     <div>
       <Navbar />
       <div style={styles.container}>
-        <div style={styles.formContainer}>
+        <div style={styles.form}>
           <h2 style={styles.title}>LOGIN</h2>
           <div style={styles.inputGroup}>
             <label htmlFor="email" style={styles.label}>E-Mail:</label>
@@ -33,7 +34,10 @@ function Login() {
             </div>
         </div>
       </div>
+      <Footer></Footer>
+
     </div>
+    
   );
 }
 
@@ -43,9 +47,9 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100vh',
+    height: '60vh',
   },
-  formContainer: {
+  form: {
     width: '360px',
     padding: '20px',
     backgroundColor: '#f5f5f5', // Gri tonları
