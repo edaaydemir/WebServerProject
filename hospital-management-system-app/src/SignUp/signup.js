@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../navbar';
+import Footer from '../footer';
 
 function Signup() {
 
@@ -15,7 +16,7 @@ function Signup() {
 
   const [phoneNumberError, setPhoneNumberError] = useState(false);
   const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState(''); // Kayıt başarılı olduğunda görüntülenecek mesaj
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -94,11 +95,10 @@ function Signup() {
           </div>
         </form>
       </div>
-      {/* Kayıt başarılı olduğunda görüntülenecek mesaj */}
-      {successMessage && <p style={styles.successMessage}>{successMessage}</p>}
-      {/* Hata mesajı */}
-      {error && <p style={styles.error}>{error}</p>}
-    </div> </div>
+      
+    </div> 
+    <Footer></Footer>
+    </div>
   );
 }
 
@@ -108,7 +108,7 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100vh',
+    
     marginTop:'30px',
     marginBottom:'30px'
   },
