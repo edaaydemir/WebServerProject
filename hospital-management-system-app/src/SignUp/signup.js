@@ -98,7 +98,7 @@ function Signup() {
 
       </div>
       <Footer></Footer>
-       </div>
+    </div>
 
   );
 }
@@ -116,13 +116,13 @@ const styles = {
   form: {
     width: '400px',
     padding: '20px',
-    backgroundColor: '#f5f5f5', 
+    backgroundColor: '#f5f5f5',
     borderRadius: '10px',
     boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.1)',
     textAlign: 'center',
   },
   title: {
-    color: '#424242', 
+    color: '#424242',
     marginBottom: '10px',
   },
   inputGroup: {

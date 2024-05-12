@@ -30,14 +30,14 @@ function Login() {
             <input type="password" id="password" name="password" style={styles.input} onChange={handleChange} required />
           </div>
           <div style={styles.signUp}>
-              <button type="submit" style={styles.button}>Login</button>
-            </div>
+            <button type="submit" style={styles.button}>Login</button>
+          </div>
         </div>
       </div>
       <Footer></Footer>
 
     </div>
-    
+
   );
 }
 
