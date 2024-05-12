@@ -1,5 +1,6 @@
 package com.HMSApp.HospitalMngmnt.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -9,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -20,6 +22,7 @@ import lombok.ToString;
 
 import com.HMSApp.HospitalMngmnt.entity.enums.City;
 import com.HMSApp.HospitalMngmnt.entity.enums.Status;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 @Getter
@@ -64,5 +67,17 @@ public class Patient {
 
 	@Enumerated(EnumType.STRING)
 	private Status status;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Appointment> listOfAppointments = new ArrayList<>();
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Review> listReviews = new ArrayList<>();
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Message> listOfMessage = new ArrayList<>();
 
 }
