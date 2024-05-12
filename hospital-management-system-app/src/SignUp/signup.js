@@ -37,7 +37,7 @@ function Signup() {
         });
       }
     } else {
-        setUserData({
+      setUserData({
         ...userData,
         [name]: value
       });
@@ -46,9 +46,9 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
   };
-  
+
   const validatePhoneNumber = (phoneNumber) => {
     const regex = /^\+90\d{10}$/;
     return regex.test(phoneNumber);
@@ -56,49 +56,49 @@ function Signup() {
 
   return (
     <div> <Navbar></Navbar>
-    <div style={styles.container}>
-      <div style={styles.formContainer}>
-        <h2 style={styles.title}>Sign Up</h2>
-        <form onSubmit={handleSubmit}>
-          <div style={styles.inputGroup}>
-            <label htmlFor="email" style={styles.label}>E-Mail:</label>
-            <input type="email" id="email" name="email" style={styles.input} onChange={handleChange} required />
-          </div>
-          <div style={styles.inputGroup}>
-            <label htmlFor="password" style={styles.label}>Password:</label>
-            <input type="password" id="password" name="password" style={styles.input} onChange={handleChange} required />
-          </div>
-          <div style={styles.inputGroup}>
-            <label htmlFor="confirmPassword" style={styles.label}>Confirm Password:</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" style={styles.input} onChange={handleChange} required />
-          </div>
-          <div style={styles.inputGroup}>
-            <label htmlFor="name" style={styles.label}>Name:</label>
-            <input type="text" id="name" name="name" style={styles.input} onChange={handleChange} required />
-          </div>
-          <div style={styles.inputGroup}>
-            <label htmlFor="surname" style={styles.label}>Surname:</label>
-            <input type="text" id="surname" name="surname" style={styles.input} onChange={handleChange} required />
-          </div>
-          <div style={styles.inputGroup}>
-            <label htmlFor="phoneNumber" style={styles.label}>Phone Number:</label>
-            <input type="text" id="phoneNumber" name="phoneNumber" style={styles.input} onChange={handleChange} value={userData.phoneNumber} required />
-            {phoneNumberError && <span style={styles.error}>Please enter a valid phone number starting with +90 and containing exactly 10 digits.</span>}
-          </div>
-          <div style={styles.inputGroup}>
-            <label htmlFor="birthday" style={styles.label}>Birthday:</label>
-            <input type="date" id="birthday" name="birthday" style={styles.input} onChange={handleChange} required />
-          </div>
-          <div style={styles.signUp}>
-            <button type="submit" style={styles.button}>Sign Up</button>
-          </div>
-        </form>
-      </div>
-      {/* Kayıt başarılı olduğunda görüntülenecek mesaj */}
-      {successMessage && <p style={styles.successMessage}>{successMessage}</p>}
-      {/* Hata mesajı */}
-      {error && <p style={styles.error}>{error}</p>}
-    </div> </div>
+      <div style={styles.container}>
+        <div style={styles.formContainer}>
+          <h2 style={styles.title}>Sign Up</h2>
+          <form onSubmit={handleSubmit}>
+            <div style={styles.inputGroup}>
+              <label htmlFor="email" style={styles.label}>E-Mail:</label>
+              <input type="email" id="email" name="email" style={styles.input} onChange={handleChange} required />
+            </div>
+            <div style={styles.inputGroup}>
+              <label htmlFor="password" style={styles.label}>Password:</label>
+              <input type="password" id="password" name="password" style={styles.input} onChange={handleChange} required />
+            </div>
+            <div style={styles.inputGroup}>
+              <label htmlFor="confirmPassword" style={styles.label}>Confirm Password:</label>
+              <input type="password" id="confirmPassword" name="confirmPassword" style={styles.input} onChange={handleChange} required />
+            </div>
+            <div style={styles.inputGroup}>
+              <label htmlFor="name" style={styles.label}>Name:</label>
+              <input type="text" id="name" name="name" style={styles.input} onChange={handleChange} required />
+            </div>
+            <div style={styles.inputGroup}>
+              <label htmlFor="surname" style={styles.label}>Surname:</label>
+              <input type="text" id="surname" name="surname" style={styles.input} onChange={handleChange} required />
+            </div>
+            <div style={styles.inputGroup}>
+              <label htmlFor="phoneNumber" style={styles.label}>Phone Number:</label>
+              <input type="text" id="phoneNumber" name="phoneNumber" style={styles.input} onChange={handleChange} value={userData.phoneNumber} required />
+              {phoneNumberError && <span style={styles.error}>Please enter a valid phone number starting with +90 and containing exactly 10 digits.</span>}
+            </div>
+            <div style={styles.inputGroup}>
+              <label htmlFor="birthday" style={styles.label}>Birthday:</label>
+              <input type="date" id="birthday" name="birthday" style={styles.input} onChange={handleChange} required />
+            </div>
+            <div style={styles.signUp}>
+              <button type="submit" style={styles.button}>Sign Up</button>
+            </div>
+          </form>
+        </div>
+        {/* Kayıt başarılı olduğunda görüntülenecek mesaj */}
+        {successMessage && <p style={styles.successMessage}>{successMessage}</p>}
+        {/* Hata mesajı */}
+        {error && <p style={styles.error}>{error}</p>}
+      </div> </div>
   );
 }
 
@@ -109,8 +109,8 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     height: '100vh',
-    marginTop:'30px',
-    marginBottom:'30px'
+    marginTop: '30px',
+    marginBottom: '30px'
   },
   formContainer: {
     width: '400px',
@@ -142,7 +142,7 @@ const styles = {
     color: '#6a1b9a',
     marginRight: '10px',
     minWidth: '120px',
-    textAlign: 'left', 
+    textAlign: 'left',
   },
   input: {
     flex: '1',
@@ -166,7 +166,7 @@ const styles = {
     color: 'red',
     fontSize: '12px',
     textAlign: 'left',
-    marginLeft: '130px', 
+    marginLeft: '130px',
   },
   successMessage: {
     color: 'green',
