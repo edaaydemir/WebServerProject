@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../navbar";
+//import Footer from "../footer";
 
 
 function Aboutus() {
