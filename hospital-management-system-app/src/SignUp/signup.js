@@ -43,6 +43,7 @@ function Signup() {
         [name]: value
       });
     }
+    console.log(name , value);
   };
 
   const handleSubmit = async (e) => {

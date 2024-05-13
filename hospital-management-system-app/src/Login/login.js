@@ -12,7 +12,9 @@ function Login() {
     setUserData({
       ...userData,
       [name]: value
+      
     });
+    console.log(name , value);
   };
 
   return (
