@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../navbar';
 import Footer from '../footer';
 import io from 'socket.io-client'; // Import Socket.io client
+import { useNavigate } from 'react-router-dom'; // useHistory yerine useNavigate kullanıyoruz
 
 const socket = io('http://localhost:3001'); // Connect to the server
 
 function Signup() {
+  const navigate = useNavigate(); // useNavigate kancasını kullanarak tarayıcı geçişini yönetebiliriz
 
   const [userData, setUserData] = useState({
     email: '',
@@ -18,9 +20,7 @@ function Signup() {
   });
 
   const [phoneNumberError, setPhoneNumberError] = useState(false);
-  const [error, setError] = useState('');
   
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === 'phoneNumber') {
@@ -48,18 +48,16 @@ function Signup() {
     }
     console.log(userData);
   };
-  useEffect(() => {
-    socket.emit('current_patient:', userData);
-  },);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    socket.emit('current_User', userData); // Emit user data to the server
+    setTimeout(() => {
+      navigate('/homepage'); // Anasayfaya yönlendirme
+    }, 3000); // 3 saniye sonra yönlendirme yapılacak
+    // Add additional logic for form submission or API requests here
   };
 
-  const validatePhoneNumber = (phoneNumber) => {
-    const regex = /^\+90\d{10}$/;
-    return regex.test(phoneNumber);
-  };
+
 
   return (
     <div> <Navbar></Navbar>
@@ -97,7 +95,7 @@ function Signup() {
               <input type="date" id="birthday" name="birthday" style={styles.input} onChange={handleChange} required />
             </div>
             <div style={styles.signUp}>
-              <button type="submit" style={styles.button}>Sign Up</button>
+              <button type="submit" style={styles.button} >Sign Up</button>
             </div>
           </form>
         </div>
