@@ -13,11 +13,11 @@ import com.HMSApp.HospitalMngmnt.exception.OptionalException;
 
 public interface IPatientService {
 
-    Patient getPatientById(Long patientid) throws OptionalException;
+    Patient getPatientById(Integer patientid) throws OptionalException;
 
     Patient createPatient(Patient patient) throws OptionalException;
 
-    Patient updatePatient(Long patientid, Patient patientDetails) throws OptionalException;
+    Patient updatePatient(Integer patientid, Patient patientDetails) throws OptionalException;
 
     Appointment bookAppointment(String key, Appointment appointment) throws IOException, OptionalException; // MessagingException;
 
@@ -32,7 +32,5 @@ public interface IPatientService {
     Patient forgetPassword(String key, Forget forgetPassword) throws OptionalException;
 
     Session getUserByUuid(String uuid) throws OptionalException;
-
-    void deletePatient(Long patientid);
 
 }

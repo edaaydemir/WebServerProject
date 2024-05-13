@@ -19,32 +19,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/patient")
 public class PatientController {
 
-    @Autowired
-    private IPatientService patientService;
-
-    @GetMapping
-    public List<Patient> getAllPatients() {
-        return patientService.getAllPatients();
-    }
-
-    @GetMapping("/{patientid}")
-    public Patient getPatientById(@PathVariable Long patientid) {
-        return patientService.getPatientById(patientid);
-    }
-
-    @PostMapping
-    public Patient createPatient(@RequestBody Patient patient) {
-        return patientService.createPatient(patient);
-    }
-
-    @PutMapping("/{patientid}")
-    public Patient updatePatient(@PathVariable Long patientid, @RequestBody Patient patientDetails) {
-        return patientService.updatePatient(patientid, patientDetails);
-    }
-
-    @DeleteMapping("/{patientid}")
-    public void deletePatient(@PathVariable Long patinetid) {
-        patientService.deletePatient(patinetid);
-    }
-
 }

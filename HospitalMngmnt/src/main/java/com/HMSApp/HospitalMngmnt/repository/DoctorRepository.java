@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.HMSApp.HospitalMngmnt.entity.Doctor;
 
 @Repository
-public interface DoctorRepository extends JpaRepository<Doctor, Long> {
+public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 
     public Doctor findByEmail(String email);
 
