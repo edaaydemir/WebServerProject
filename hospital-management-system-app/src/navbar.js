@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const styles = {
     container: {
-        backgroundColor: "#6a1b9a",
-        color: "#fff",
+        backgroundColor: "#f5f5f5", // Gri tonları
+        color: "#424242", // Koyu gri
         padding: "10px 20px",
         width: "100%",
         boxSizing: "border-box",
@@ -12,7 +12,7 @@ const styles = {
       },
   navbarLink: {
     textDecoration: "none",
-    color: "#fff",
+    color: "#424242", // Koyu gri
     fontSize: "1.2rem",
     fontWeight: "bold",
   },
@@ -20,7 +20,7 @@ const styles = {
     padding: "8px 16px",
     borderRadius: "5px",
     backgroundColor: "#fff",
-    color: "#6a1b9a",
+    color: '#424242', // Mor tonu
     textDecoration: "none",
     border: "none",
     cursor: "pointer",
@@ -28,8 +28,6 @@ const styles = {
 };
 
 function Navbar() {
-
-
   return (
     <div style={styles.container}>   
         <div style={{display:"flex" , alignItems:"center" , justifyContent:"space-between"}}>
