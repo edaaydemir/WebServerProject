@@ -2,7 +2,9 @@ package com.HMSApp.HospitalMngmnt.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -68,13 +70,16 @@ public class Patient {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
+	// doctor or patient information
+	private String type;
+
 	@OneToMany(cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Appointment> listOfAppointments = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JsonIgnore
-	List<Review> listReviews = new ArrayList<>();
+	List<Receipt> listReceipts = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JsonIgnore

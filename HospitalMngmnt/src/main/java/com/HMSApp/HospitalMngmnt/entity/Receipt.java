@@ -3,9 +3,11 @@ package com.HMSApp.HospitalMngmnt.entity;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -26,13 +28,15 @@ public class Receipt {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer receiptid;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patientid")
     private Patient patient;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "doctorid")
     private Doctor doctor;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "receipt")
     private Appointment appointment;
 
     private String receiptText;
@@ -44,12 +48,18 @@ public class Receipt {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+
+        if (getClass() != obj.getClass()) {
             return false;
+        }
+
         Receipt other = (Receipt) obj;
         return Objects.equals(receiptid, other.receiptid);
     }
