@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../navbar';
 import Footer from '../footer';
+import io from 'socket.io-client'; // Import Socket.io client
+
+const socket = io('http://localhost:3001'); // Connect to the server
 
 function Signup() {
 
@@ -43,11 +46,14 @@ function Signup() {
         [name]: value
       });
     }
+    console.log(userData);
   };
+  useEffect(() => {
+    socket.emit('current_patient:', userData);
+  },);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
   };
 
   const validatePhoneNumber = (phoneNumber) => {
