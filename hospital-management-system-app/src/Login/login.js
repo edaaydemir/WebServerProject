@@ -1,21 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../navbar";
-import Footer from '../footer';
+import Footer from "../footer";
+import io from "socket.io-client";
+
+const socket = io("http://localhost:3001");
 
 function Login() {
   const [userData, setUserData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
+  const [serverData, setServerData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [loginError, setLoginError] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData({
       ...userData,
       [name]: value
-      
+
+    
+
     });
     console.log(name , value);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Add logic for form submission or API requests here
+  };
+
+  useEffect(() => {
+    // Burada eğer gerekirse, sunucudan gelen verilere abone olabilirsiniz
+    socket.on("email", (hotmail) => {
+      console.log(hotmail);
+    });
+
+    // Abonelikten çıkış sağlamak için
+    socket.on("password", (şifre) => {
+    console.log(şifre);
+ });
+  }, []);
+ 
+  
 
   return (
     <div>
@@ -23,23 +54,44 @@ function Login() {
       <div style={styles.container}>
         <div style={styles.form}>
           <h2 style={styles.title}>LOGIN</h2>
-          <div style={styles.inputGroup}>
-            <label htmlFor="email" style={styles.label}>E-Mail:</label>
-            <input type="email" id="email" name="email" style={styles.input} onChange={handleChange} required />
-          </div>
-          <div style={styles.inputGroup}>
-            <label htmlFor="password" style={styles.label}>Password:</label>
-            <input type="password" id="password" name="password" style={styles.input} onChange={handleChange} required />
-          </div>
-          <div style={styles.signUp}>
-            <button type="submit" style={styles.button}>Login</button>
-          </div>
+          <form onSubmit={handleSubmit}>
+            <div style={styles.inputGroup}>
+              <label htmlFor="email" style={styles.label}>
+                E-Mail:
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                style={styles.input}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div style={styles.inputGroup}>
+              <label htmlFor="password" style={styles.label}>
+                Password:
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                style={styles.input}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div style={styles.error}>{loginError}</div>
+            <div style={styles.signUp}>
+              <button type="submit" style={styles.button}>
+                Login
+              </button>
+            </div>
+          </form>
         </div>
       </div>
-      <Footer></Footer>
-
+      <Footer />
     </div>
-
   );
 }
 
@@ -63,7 +115,6 @@ const styles = {
     color: '#424242', // Koyu gri
     marginBottom: '20px',
   },
-
   inputGroup: {
     display: 'flex',
     flexDirection: 'row',
