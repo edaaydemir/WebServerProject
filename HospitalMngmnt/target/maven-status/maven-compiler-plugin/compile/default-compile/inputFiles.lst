@@ -13,6 +13,7 @@ C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\c
 C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\entity\Patient.java
 C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\entity\enums\Role.java
 C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\entity\Forget.java
+C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\controller\DoctorController.java
 C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\entity\Session.java
 C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\entity\Receipt.java
 C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\entity\Appointment.java
@@ -24,8 +25,9 @@ C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\c
 C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\entity\LoginUserKey.java
 C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\HospitalMngmntApplication.java
 C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\service\DoctorServiceImpl.java
+C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\controller\LoginController.java
 C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\entity\enums\City.java
-C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\entity\Message.java
+C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\controller\AdminController.java
 C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\exception\OptionalException.java
 C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\controller\PatientController.java
 C:\Users\Mehmet\Documents\GitHub\WebServerProject\HospitalMngmnt\src\main\java\com\HMSApp\HospitalMngmnt\service\IEmailService.java

@@ -2,6 +2,8 @@ package com.HMSApp.HospitalMngmnt.entity;
 
 import java.time.LocalDateTime;
 
+import org.springframework.stereotype.Component;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +18,7 @@ import lombok.ToString;
 @Setter
 @Entity
 @ToString
+@Component
 public class Session {
 
     @Id

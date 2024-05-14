@@ -1,6 +1,7 @@
 package com.HMSApp.HospitalMngmnt.service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,21 @@ public class DoctorLoginServiceImpl implements IDoctorLoginService {
             throw new OptionalException("Please enter a valid email");
         }
 
+        Optional<Session> patientSessionOptional = sessionRepository.findById(doctor.getDoctorid());
+
+        if (patientSessionOptional.isPresent()) {
+
+            if (PatientServiceImpl.bCryptPasswordEncoder.matches(login.getPassword(), doctor.getPassword())) {
+
+                loginUserKey.setUuid(patientSessionOptional.get().getUuid());
+                loginUserKey.setMesasage("Logged in ");
+                return loginUserKey;
+
+            }
+
+            throw new OptionalException("Please enter valid details");
+        }
+
         // for postman comment from here
 
         // Optional<Session> validSessionOpt =
@@ -50,28 +66,39 @@ public class DoctorLoginServiceImpl implements IDoctorLoginService {
 
         if (PatientServiceImpl.bCryptPasswordEncoder.matches(login.getPassword(), doctor.getPassword())) {
 
-            // check doctor have permission or not
-
-            if (doctor.getIsValid() == false) {
-
-                throw new OptionalException("You don't have permission to login. Please contact Admin for permission.");
-            }
-
-            // if(existingDoctor.getPassword().equals(loginDTO.getPassword())) {
-
             String key = generateRandomString();
 
             Session currentPatientSession = new Session(doctor.getDoctorid(), key, LocalDateTime.now());
 
-            doctor.setType("doctor");
-            currentPatientSession.setUserId(doctor.getDoctorid());
-            currentPatientSession.setUserType("doctor");
+            if (PatientServiceImpl.bCryptPasswordEncoder.matches("admin", doctor.getPassword())
+                    && doctor.getEmail().equals("admin@mail.com")) {
+
+                doctor.setType("admin");
+                currentPatientSession.setUserType("admin");
+                currentPatientSession.setUserId(doctor.getDoctorid());
+
+                sessionRepository.save(currentPatientSession);
+                doctorRepository.save(doctor);
+
+                loginUserKey.setMesasage("Login Successful as admin with key");
+
+                loginUserKey.setUuid(key);
+
+                return loginUserKey;
+
+            } else {
+
+                doctor.setType("doctor");
+                currentPatientSession.setUserId(doctor.getDoctorid());
+                currentPatientSession.setUserType("patient");
+
+            }
 
             doctorRepository.save(doctor);
 
             sessionRepository.save(currentPatientSession);
 
-            loginUserKey.setMesasage("Başarıyla giriş yapıldı");
+            loginUserKey.setMesasage("Login Successful as doctor with this key");
 
             loginUserKey.setUuid(key);
 

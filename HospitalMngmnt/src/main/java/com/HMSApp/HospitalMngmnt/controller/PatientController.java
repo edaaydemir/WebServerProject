@@ -7,12 +7,14 @@ import com.HMSApp.HospitalMngmnt.entity.Patient;
 import com.HMSApp.HospitalMngmnt.entity.Receipt;
 import com.HMSApp.HospitalMngmnt.entity.Session;
 import com.HMSApp.HospitalMngmnt.exception.OptionalException;
+import com.HMSApp.HospitalMngmnt.service.IDoctorService;
 import com.HMSApp.HospitalMngmnt.service.IPatientOrAdminLoginService;
 import com.HMSApp.HospitalMngmnt.service.IPatientService;
 
 import jakarta.validation.Valid;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +35,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class PatientController {
 
     @Autowired
+    IDoctorService doctorService;
+
+    @Autowired
     IPatientService patientService;
 
     @Autowired
     IPatientOrAdminLoginService adminLoginServiceProvider;
+
+    @Autowired
+    Session session;
 
     @CrossOrigin
     @PostMapping("/registerPatient")
@@ -55,7 +63,7 @@ public class PatientController {
         return new ResponseEntity<>(updatedPatient, HttpStatus.OK);
     }
 
-    @GetMapping("/patients/{patientId}")
+    @GetMapping("/patients/{patientid}")
     public ResponseEntity<Patient> getPatientById(@PathVariable Integer patientid) throws OptionalException {
         Patient patient = patientService.getPatientById(patientid);
         return new ResponseEntity<>(patient, HttpStatus.OK);
@@ -155,10 +163,10 @@ public class PatientController {
         }
     }
 
-    @DeleteMapping("/appointment")
+    @DeleteMapping("/deleteAppointment")
     @CrossOrigin
     public ResponseEntity<Appointment> deleteAppointment(@RequestParam String key, @RequestBody Appointment appointment)
-            throws OptionalException, Exception {
+            throws OptionalException {
 
         if (adminLoginServiceProvider.isLogged(key)) {
 
@@ -241,6 +249,24 @@ public class PatientController {
 
         }
 
+    }
+
+    @PostMapping("/availableTiming")
+    @CrossOrigin
+    public ResponseEntity<List<LocalDateTime>> getAvailbleTimingOfDoctor(@RequestParam String key,
+            @RequestBody Doctor doctor) throws IOException, OptionalException {
+
+        if (adminLoginServiceProvider.isLogged(key)) {
+
+            List<LocalDateTime> listOfAvailable = doctorService.getAvailableDoctorForBooking(key, doctor);
+
+            return new ResponseEntity<List<LocalDateTime>>(listOfAvailable, HttpStatus.ACCEPTED);
+
+        } else {
+
+            throw new OptionalException("Invalid key or please login first");
+
+        }
     }
 
 }

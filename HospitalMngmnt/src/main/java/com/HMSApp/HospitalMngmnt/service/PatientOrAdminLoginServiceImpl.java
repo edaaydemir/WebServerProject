@@ -67,7 +67,7 @@ public class PatientOrAdminLoginServiceImpl implements IPatientOrAdminLoginServi
             Session currentPatientSession = new Session(patient.getPatientid(), key, LocalDateTime.now());
 
             if (PatientServiceImpl.bCryptPasswordEncoder.matches("admin", patient.getPassword())
-                    && patient.getEmail().equals("admin")) {
+                    && patient.getEmail().equals("admin@mail.com")) {
 
                 patient.setType("admin");
                 currentPatientSession.setUserType("admin");
