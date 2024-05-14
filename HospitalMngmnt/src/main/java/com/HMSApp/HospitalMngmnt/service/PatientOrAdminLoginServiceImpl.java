@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.HMSApp.HospitalMngmnt.entity.Login;
 import com.HMSApp.HospitalMngmnt.entity.LoginUserKey;
@@ -14,6 +15,7 @@ import com.HMSApp.HospitalMngmnt.exception.OptionalException;
 import com.HMSApp.HospitalMngmnt.repository.PatientRepository;
 import com.HMSApp.HospitalMngmnt.repository.SessionRepository;
 
+@Service
 public class PatientOrAdminLoginServiceImpl implements IPatientOrAdminLoginService {
 
     @Autowired
@@ -48,11 +50,15 @@ public class PatientOrAdminLoginServiceImpl implements IPatientOrAdminLoginServi
             throw new OptionalException("Please enter valid details");
         }
 
-        if (patientSessionOptional.isPresent()) {
+        // for postman comment from here
 
-            throw new OptionalException("User already login");
+        // if (patientSessionOptional.isPresent()) {
 
-        }
+        // throw new OptionalException("User already login");
+
+        // }
+
+        // to here
 
         if (PatientServiceImpl.bCryptPasswordEncoder.matches(login.getPassword(), patient.getPassword())) {
 

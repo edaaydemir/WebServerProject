@@ -2,20 +2,19 @@ package com.HMSApp.HospitalMngmnt.service;
 
 import java.io.IOException;
 import java.security.SecureRandom;
-import java.text.DecimalFormat;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Properties;
+
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import jakarta.mail.MessagingException;
 
@@ -24,6 +23,7 @@ import com.HMSApp.HospitalMngmnt.entity.Doctor;
 import com.HMSApp.HospitalMngmnt.entity.EmailBody;
 import com.HMSApp.HospitalMngmnt.entity.Forget;
 import com.HMSApp.HospitalMngmnt.entity.Patient;
+import com.HMSApp.HospitalMngmnt.entity.Receipt;
 import com.HMSApp.HospitalMngmnt.entity.Session;
 import com.HMSApp.HospitalMngmnt.exception.OptionalException;
 import com.HMSApp.HospitalMngmnt.repository.AppointmentRepository;
@@ -46,7 +46,7 @@ public class PatientServiceImpl implements IPatientService, Runnable {
     DoctorRepository doctorRepository;
 
     @Autowired
-    PatientRepository user;
+    PatientRepository userRepository;
 
     @Autowired
     AppointmentRepository appointmentRepository;
@@ -82,7 +82,7 @@ public class PatientServiceImpl implements IPatientService, Runnable {
 
     @Override
     public Patient createPatient(Patient patient) throws OptionalException {
-        Patient dbUser = user.findByEmail(patient.getEmail());
+        Patient dbUser = userRepository.findByEmail(patient.getEmail());
 
         if (dbUser == null) {
 
@@ -90,7 +90,7 @@ public class PatientServiceImpl implements IPatientService, Runnable {
 
             patient.setPassword(bCryptPasswordEncoder.encode(patient.getPassword()));
 
-            user.save(patient);
+            userRepository.save(patient);
 
             return patient;
         }
@@ -102,19 +102,21 @@ public class PatientServiceImpl implements IPatientService, Runnable {
     }
 
     @Override
-    public Patient updatePatient(Integer patientid, Patient patientDetails) {
-        Patient patient = getPatientById(patientid);
-        patient.setPatientname(patientDetails.getPatientname());
-        patient.setPatientsurname(patientDetails.getPatientsurname());
-        patient.setAge(patientDetails.getAge());
-        patient.setPhoneNum(patientDetails.getPhoneNum());
-        patient.setGender(patientDetails.getGender());
-        patient.setDateOfBorn(patientDetails.getDateOfBorn());
-        patient.setEmail(patientDetails.getEmail());
-        patient.setPassword(patientDetails.getPassword());
-        patient.setCity(patientDetails.getCity());
-        patient.setStatus(patientDetails.getStatus());
-        return patientRepository.save(patient);
+    public Patient updatePatient(Patient user, String key) throws OptionalException {
+        Session loggedInUser = sessionRepository.findByUuid(key);
+
+        if (loggedInUser == null) {
+
+            throw new OptionalException("Please provide the valid key to update the user");
+        }
+
+        if (user.getPatientid() == loggedInUser.getUserId()) {
+
+            return userRepository.save(user);
+
+        } else {
+            throw new OptionalException("Invalid user details. Login first");
+        }
     }
 
     public static void getAppointmentDates(Integer from, Integer to) throws IOException, OptionalException {
@@ -532,6 +534,55 @@ public class PatientServiceImpl implements IPatientService, Runnable {
         } catch (MessagingException e) {
 
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Patient getPatientByUuid(String uuid) throws OptionalException {
+        Session currentPatient = sessionRepository.findByUuid(uuid);
+
+        Optional<Patient> patient = userRepository.findById(currentPatient.getUserId());
+
+        if (patient.isPresent()) {
+
+            return patient.get();
+
+        } else {
+
+            throw new OptionalException("Patient or Admin not present by this uuid " + uuid);
+        }
+    }
+
+    @Override
+    public Receipt getReceiptOfParticularAppointment(String key, Appointment appointment) throws OptionalException {
+        Session currentPatient = sessionRepository.findByUuid(key);
+
+        Optional<Patient> registerPatient = patientRepository.findById(currentPatient.getUserId());
+
+        if (registerPatient.isPresent()) {
+
+            List<Receipt> listOfReceipt = registerPatient.get().getListReceipts();
+
+            if (!listOfReceipt.isEmpty()) {
+
+                for (Receipt eachReceipt : listOfReceipt) {
+
+                    if (eachReceipt.getAppointment().getAppointmentId() == appointment.getAppointmentId()) {
+
+                        return eachReceipt;
+                    }
+                }
+
+                throw new OptionalException("No review found");
+
+            } else {
+
+                throw new OptionalException("No review found with this doctor");
+
+            }
+        } else {
+
+            throw new OptionalException("Doctor not present by this uuid " + key);
         }
     }
 }

@@ -8,6 +8,7 @@ import com.HMSApp.HospitalMngmnt.entity.Doctor;
 import com.HMSApp.HospitalMngmnt.entity.Forget;
 //import com.HMSApp.HospitalMngmnt.dto.PatientDto;
 import com.HMSApp.HospitalMngmnt.entity.Patient;
+import com.HMSApp.HospitalMngmnt.entity.Receipt;
 import com.HMSApp.HospitalMngmnt.entity.Session;
 import com.HMSApp.HospitalMngmnt.exception.OptionalException;
 
@@ -17,7 +18,9 @@ public interface IPatientService {
 
     Patient createPatient(Patient patient) throws OptionalException;
 
-    Patient updatePatient(Integer patientid, Patient patientDetails) throws OptionalException;
+    Patient updatePatient(Patient user, String key) throws OptionalException;
+
+    Patient getPatientByUuid(String uuid) throws OptionalException;
 
     Appointment bookAppointment(String key, Appointment appointment) throws IOException, OptionalException; // MessagingException;
 
@@ -32,5 +35,7 @@ public interface IPatientService {
     Patient forgetPassword(String key, Forget forgetPassword) throws OptionalException;
 
     Session getUserByUuid(String uuid) throws OptionalException;
+
+    Receipt getReceiptOfParticularAppointment(String key, Appointment appointment) throws OptionalException;
 
 }

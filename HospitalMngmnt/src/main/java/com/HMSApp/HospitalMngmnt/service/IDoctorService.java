@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.security.auth.login.LoginException;
-
 import com.HMSApp.HospitalMngmnt.entity.Appointment;
 import com.HMSApp.HospitalMngmnt.entity.Doctor;
 import com.HMSApp.HospitalMngmnt.entity.Patient;
@@ -34,11 +32,13 @@ public interface IDoctorService {
 
     Receipt deleteReceipt(String key, Receipt Receipt) throws OptionalException;
 
-    Receipt makeReviewToDoctorAppointment(String key, Receipt review)
+    Receipt makeReceiptToDoctorAppointment(String key, Receipt review)
             throws OptionalException;
 
-    Receipt updateReview(String key, Receipt review) throws OptionalException;
+    Receipt updateReceipt(String key, Receipt review) throws OptionalException;
 
     Session getCurrentUserByUuid(String uuid) throws OptionalException;
+
+    Doctor getDoctorByUuid(String uuid) throws OptionalException;
 
 }

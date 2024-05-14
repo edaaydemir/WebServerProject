@@ -74,8 +74,4 @@ public class Doctor {
     @JsonIgnore
     List<Receipt> listReceipts = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JsonIgnore
-    List<Message> listOfMessage = new ArrayList<>();
-
 }
