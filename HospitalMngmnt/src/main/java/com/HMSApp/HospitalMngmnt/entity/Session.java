@@ -35,6 +35,12 @@ public class Session {
         // Default constructor (if needed)
     }
 
+    public Session(String uuid, String userType) {
+        super();
+        this.uuid = uuid;
+        this.userType = userType;
+    }
+
     public Session(Integer userId, String uuid, LocalDateTime localDateTime) {
         super();
         this.userId = userId;

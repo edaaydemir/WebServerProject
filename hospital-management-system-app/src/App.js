@@ -12,6 +12,7 @@ import SignUp from "./signup/signup";
 import Doctorlogin from "./login/Doctorlogin";
 import AdminPanel from "./AdminPanel";
 import PatientPanel from "./PatientPanel";
+import DoctorPanel from "./DoctorPanel";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/Doctorlogin" element={<Doctorlogin />} />
             <Route path="/AdminPanel" element={<AdminPanel />} />
             <Route path="/PatientPanel" element={<PatientPanel />} />
+            <Route path="/DoctorPanel" element={<DoctorPanel />} />
           </Routes>
         </div>
       </Router>

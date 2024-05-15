@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 export const ListPatientComponent = () => {
-  const [patients, setPatients] = useState([])
-    return (
-    <div>ListPatientComponent</div>
-  )
-}
+  const [patients, setPatients] = useState([]);
+  return <div>ListPatientComponent</div>;
+};

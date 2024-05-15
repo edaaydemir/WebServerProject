@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../navbar";
 import Footer from "../footer";
-import io from "socket.io-client";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Doctorlogin() {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -21,44 +23,24 @@ function Doctorlogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        // Assuming the backend returns a token or some authentication key
-        console.log("Login successful!", data);
-        // You can handle successful login here, e.g., storing token in localStorage
+      const response = await axios.post(
+        "http://localhost:8080/loginDoctor",
+        userData
+      );
+      if (response.status === 200) {
+        const { uuid } = response.data; // Assuming the backend returns UUID
+        console.log("Login successful! UUID:", uuid);
+        // Redirect to another page using the retrieved UUID
+        const urlWithSessionId = `/DoctorPanel?key=${uuid}`;
+        navigate(urlWithSessionId);
       } else {
-        const errorData = await response.json();
-        // Assuming the backend returns error message in case of login failure
+        const errorData = response.data;
         setLoginError(errorData.message);
       }
     } catch (error) {
       console.error("Error during login:", error);
     }
   };
-
-  useEffect(() => {
-    // Here you can add your socket.io logic if needed
-    socket.on("email", (hotmail) => {
-      console.log(hotmail);
-    });
-
-    socket.on("password", (şifre) => {
-      console.log(şifre);
-    });
-
-    // Clean up the socket listeners when the component unmounts
-    return () => {
-      socket.off("email");
-      socket.off("password");
-    };
-  }, []);
 
   return (
     <div>
