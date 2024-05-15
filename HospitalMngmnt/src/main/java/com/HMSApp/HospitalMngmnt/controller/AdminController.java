@@ -23,6 +23,7 @@ import com.HMSApp.HospitalMngmnt.service.IPatientOrAdminLoginService;
 import com.HMSApp.HospitalMngmnt.service.IPatientService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class AdminController {
 
 	@Autowired

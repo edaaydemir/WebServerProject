@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../navbar";
 import Footer from "../footer";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import io from "socket.io-client";
 
-function Login() {
-  const navigate = useNavigate();
+function Doctorlogin() {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -23,23 +21,21 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:8080/login",
-        userData
-      );
-
-      if (response.status === 200) {
-        const { uuid } = response.data; // Assuming the backend returns UUID
-        console.log("Login successful! UUID:", uuid);
-        // Redirect to another page using the retrieved UUID
-        const urlWithSessionId = `${
-          userData.email === "admin@mail.com" && userData.password === "admin"
-            ? "/AdminPanel"
-            : "/PatientPanel"
-        }?key=${uuid}`;
-        navigate(urlWithSessionId);
+      const response = await fetch("http://localhost:8080/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        // Assuming the backend returns a token or some authentication key
+        console.log("Login successful!", data);
+        // You can handle successful login here, e.g., storing token in localStorage
       } else {
-        const errorData = response.data;
+        const errorData = await response.json();
+        // Assuming the backend returns error message in case of login failure
         setLoginError(errorData.message);
       }
     } catch (error) {
@@ -47,12 +43,29 @@ function Login() {
     }
   };
 
+  useEffect(() => {
+    // Here you can add your socket.io logic if needed
+    socket.on("email", (hotmail) => {
+      console.log(hotmail);
+    });
+
+    socket.on("password", (şifre) => {
+      console.log(şifre);
+    });
+
+    // Clean up the socket listeners when the component unmounts
+    return () => {
+      socket.off("email");
+      socket.off("password");
+    };
+  }, []);
+
   return (
     <div>
       <Navbar />
       <div style={styles.container}>
         <div style={styles.form}>
-          <h2 style={styles.title}>LOGIN</h2>
+          <h2 style={styles.title}>DOCTOR LOGIN</h2>
           <form onSubmit={handleSubmit}>
             <div style={styles.inputGroup}>
               <label style={styles.label}>Email:</label>
@@ -137,4 +150,4 @@ const styles = {
   },
 };
 
-export default Login;
+export default Doctorlogin;

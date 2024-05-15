@@ -9,7 +9,6 @@ const styles = {
     width: "100%",
     boxSizing: "border-box",
     boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-    
   },
   navbarLink: {
     textDecoration: "none",
@@ -46,8 +45,11 @@ function Navbar() {
           About Us
         </Link>
         <div style={{ display: "flex", justifyContent: "end" }}>
+          <Link to="/Doctorlogin" style={styles.button}>
+            Doctor Login
+          </Link>
           <Link to="/login" style={styles.button}>
-            Login
+            Patient Login
           </Link>
           <Link to="/signup" style={{ ...styles.button, marginLeft: "10px" }}>
             Sign Up

@@ -23,6 +23,7 @@ import com.HMSApp.HospitalMngmnt.service.IDoctorLoginService;
 import com.HMSApp.HospitalMngmnt.service.IDoctorService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class DoctorController {
 
 	@Autowired

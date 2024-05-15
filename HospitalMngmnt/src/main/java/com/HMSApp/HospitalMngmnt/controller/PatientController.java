@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-
+@CrossOrigin(origins = "http://localhost:3000")
 public class PatientController {
 
     @Autowired
@@ -61,6 +61,16 @@ public class PatientController {
         Patient updatedPatient = patientService.updatePatient(patient, key);
 
         return new ResponseEntity<>(updatedPatient, HttpStatus.OK);
+    }
+
+    @GetMapping("/getPatientByUuid")
+    public ResponseEntity<Patient> getPatientByUuid(@RequestParam String key) {
+        try {
+            Patient patient = patientService.getPatientByUuid(key);
+            return new ResponseEntity<>(patient, HttpStatus.OK);
+        } catch (OptionalException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/patients/{patientid}")

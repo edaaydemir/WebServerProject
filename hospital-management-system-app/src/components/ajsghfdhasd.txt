@@ -1,0 +1,11 @@
+ <Router> {/* Router bileşeni ile App bileşenini sarmalayın */}
+        <div className="App">
+          <Routes>
+            <Route exact path="/" element={<Homepage />} />
+            <Route path="./components/homepage" element={<Homepage />} />
+            <Route path="./components/login" element={<Login />} />
+            <Route path="./components/aboutus" element={<Aboutus />} />
+            <Route path="./components/signup" element={<SignUp />} /> 
+          </Routes>
+        </div>
+      </Router>
